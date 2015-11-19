@@ -1,0 +1,33 @@
+{
+    "title": "Add-on Review Helper",
+    "name": "addon-review-helper",
+    "version": "0.0.1",
+    "description": "Tools for Add-on reviewers",
+    "main": "index.js",
+    "author": "Andreas Wagner",
+    "engines": {
+        "firefox": ">=38.0a1"
+    },
+    "license": "GPLv3",
+    "keywords": [
+        "jetpack",
+        "amo",
+        "add-on",
+        "review"
+    ],
+    "preferences": [{
+        "name": "download_folder",
+        "type": "directory",
+        "title": "Add-on download folder"
+    }, {
+        "name": "compare_command",
+        "title": "Compare tool location",
+        "type": "file"
+    }, {
+        "name": "compare_command_args",
+        "title": "Compare tool arguments",
+        "description": "Please use $1 and $2 to specify the file names.",
+        "type": "string",
+        "value": "$1 $2"
+    }]
+}
