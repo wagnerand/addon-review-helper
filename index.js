@@ -11,18 +11,19 @@ const {Task} = Cu.import("resource://gre/modules/Task.jsm");
 const {OS} = Cu.import("resource://gre/modules/osfile.jsm")
 
 function* getValidFilename(folder, filename, increment, callback) {
-    let fullPath = `${folder}/${filename}`;
+    let fullPath = OS.Path.join(`${folder}`, `${filename}`);
     let origFilename = filename;
     while (yield OS.File.exists(fullPath)) {
         let filenameArray = origFilename.split(".");
         filenameArray[filenameArray.length - 2] = `${filenameArray[filenameArray.length - 2]}_${++increment}`;
-        fullPath = `${folder}/${filenameArray.join(".")}`;
+        fullPath = OS.Path.join(`${folder}`, `${filenameArray.join(".")}`);
     }
     return fullPath;
 }
 
 function download(downloadsArray, callback) {
     let downloadFolder = prefs.prefs.download_folder;
+	console.error('downloadFolder:', downloadFolder);
     if (!downloadFolder) {
         notifications.notify({
             title: "Add-on Review Helper",
@@ -32,10 +33,11 @@ function download(downloadsArray, callback) {
     }
     let files = [];
     Promise.all(downloadsArray.map(Task.async(function*(value, index, array) {
+		console.error('getting valid file name');
         let finalDest = yield getValidFilename(downloadFolder, value.filename, 0);
-        console.log(`Downloading ${value.downloadPath} to ${finalDest}.`);
+        console.error(`Downloading ${value.downloadPath} to ${finalDest}.`);
         yield Downloads.fetch(value.downloadPath, finalDest);
-        console.log(`${finalDest} has been downloaded`);
+        console.error(`${finalDest} has been downloaded`);
         return finalDest;
     }))).then(function(files) {
         if (callback) callback(files);
