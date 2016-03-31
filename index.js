@@ -23,7 +23,6 @@ function* getValidFilename(folder, filename, increment, callback) {
 
 function download(downloadsArray, callback) {
     let downloadFolder = prefs.prefs.download_folder;
-	console.error('downloadFolder:', downloadFolder);
     if (!downloadFolder) {
         notifications.notify({
             title: "Add-on Review Helper",
@@ -33,11 +32,10 @@ function download(downloadsArray, callback) {
     }
     let files = [];
     Promise.all(downloadsArray.map(Task.async(function*(value, index, array) {
-		console.error('getting valid file name');
         let finalDest = yield getValidFilename(downloadFolder, value.filename, 0);
-        console.error(`Downloading ${value.downloadPath} to ${finalDest}.`);
+        console.log(`Downloading ${value.downloadPath} to ${finalDest}.`);
         yield Downloads.fetch(value.downloadPath, finalDest);
-        console.error(`${finalDest} has been downloaded`);
+        console.log(`${finalDest} has been downloaded`);
         return finalDest;
     }))).then(function(files) {
         if (callback) callback(files);
