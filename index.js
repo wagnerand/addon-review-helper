@@ -11,12 +11,12 @@ const {Task} = Cu.import("resource://gre/modules/Task.jsm");
 const {OS} = Cu.import("resource://gre/modules/osfile.jsm")
 
 function* getValidFilename(folder, filename, increment, callback) {
-    let fullPath = `${folder}/${filename}`;
+    let fullPath = OS.Path.join(`${folder}`, `${filename}`);
     let origFilename = filename;
     while (yield OS.File.exists(fullPath)) {
         let filenameArray = origFilename.split(".");
         filenameArray[filenameArray.length - 2] = `${filenameArray[filenameArray.length - 2]}_${++increment}`;
-        fullPath = `${folder}/${filenameArray.join(".")}`;
+        fullPath = OS.Path.join(`${folder}`, `${filenameArray.join(".")}`);
     }
     return fullPath;
 }
