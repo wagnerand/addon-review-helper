@@ -1,19 +1,10 @@
-#arh_border {
-	border: 4px solid #E0EFFD;
-	background-color: #E0EFFD;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+#arh {
 	margin-bottom: 2em;
 }
 
 #arh_inner {
-	background-color: #fff;
-	border: 1px solid #2e5186;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	padding: 1em;
+	border: 1px solid #ebebeb;
+	padding: 10px;
 }
 
 #arh table {
@@ -23,6 +14,10 @@
 
 #arh table tr {
     border-bottom: 1px dotted #ccc;
+}
+
+#arh table tr:nth-child(2n+1) {
+    background-color: #fafafa;
 }
 
 #arh table td {

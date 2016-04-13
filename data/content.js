@@ -40,33 +40,31 @@ for (let version of data) {
 let buttonRow = $("<div>", {
     id: "arh_button-row"
 });
-buttonRow.append($("<input>", {
+buttonRow.append($("<button>", {
     id: "arh_button_download",
-    class: "arh_button",
+    class: "button",
     type: "button",
-    value: "Download",
     disabled: "disabled",
     click: function(event) {
         self.port.emit("download", prepareDownload());
     }
-}));
+}).text("Download"));
 
-buttonRow.append($("<input>", {
+buttonRow.append($("<button>", {
     id: "arh_button_compare-off",
-    class: "arh_button",
+    class: "button",
     type: "button",
-    value: "Compare with Client",
     disabled: "disabled",
     click: function(event) {
 
         self.port.emit("offline-compare", prepareDownload());
     }
-}));
-buttonRow.append($("<input>", {
+}).text("Compare with Client"));
+
+buttonRow.append($("<button>", {
     id: "arh_button_compare-on",
-    class: "arh_button",
+    class: "button",
     type: "button",
-    value: "Compare on AMO",
     disabled: "disabled",
     click: function(event) {
         let allCheckedCheckboxes = $("#arh_table input:checkbox:checked");
@@ -76,17 +74,15 @@ buttonRow.append($("<input>", {
         });
         self.port.emit("openTab", "https://" + location.host + "/firefox/files/compare/" + fileIds.reverse().join("...") + "/");
     }
-}));
+}).text("Compare on AMO"));
 
 let outerDiv = $("<div>", {
     id: "arh"
 }).append($("<h3>", {
-    text: "Files overview:"
+    text: "Files overview"
 })).append($("<div>", {
-    id: "arh_border"
-}).append($("<div>", {
     id: "arh_inner"
-}).append(table).append(buttonRow)));
+}).append(table).append(buttonRow));
 
 let reviewAction = $("#review-files-header").next().next();
 reviewAction.before(outerDiv);
@@ -94,26 +90,26 @@ reviewAction.before(outerDiv);
 $("#arh_table input:checkbox").change(function() {
     let allCheckedCheckboxes = $("#arh_table input:checkbox:checked");
     if (allCheckedCheckboxes.size() == 0) {
-        $("input:button[id^='arh_button_']").prop("disabled", true);
+        $("button:button[id^='arh_button_']").prop("disabled", true);
     } else {
-        $("input:button[id^='arh_button_download']").prop("disabled", false);
+        $("button:button[id^='arh_button_download']").prop("disabled", false);
 
         let allCheckedSources = $("#arh_table input:checkbox[value^='sources-']:checked");
         let allCheckedFiles = $("#arh_table input:checkbox[value^='file-']:checked");
         if ((allCheckedSources.size() > 0) && (allCheckedFiles.size() > 0)) {
-            $("input:button[id^='arh_button_compare-']").prop("disabled", true);
+            $("button:button[id^='arh_button_compare-']").prop("disabled", true);
         } else {
             if (allCheckedSources.size() > 0) {
-                $("input:button[id^='arh_button_compare-']").prop("disabled", true);
+                $("button:button[id^='arh_button_compare-']").prop("disabled", true);
             }
             if (allCheckedSources.size() == 2) {
-                $("input:button[id^='arh_button_compare-off']").prop("disabled", false);
+                $("button:button[id^='arh_button_compare-off']").prop("disabled", false);
             }
             if (allCheckedFiles.size() > 0) {
-                $("input:button[id^='arh_button_compare-']").prop("disabled", true);
+                $("button:button[id^='arh_button_compare-']").prop("disabled", true);
             }
             if (allCheckedFiles.size() == 2) {
-                $("input:button[id^='arh_button_compare-']").prop("disabled", false);
+                $("button:button[id^='arh_button_compare-']").prop("disabled", false);
             }
         }
     }
