@@ -42,7 +42,7 @@ let buttonRow = $("<div>", {
 });
 buttonRow.append($("<button>", {
     id: "arh_button_download",
-    class: "button",
+    class: "button arh_button",
     type: "button",
     disabled: "disabled",
     click: function(event) {
@@ -52,7 +52,7 @@ buttonRow.append($("<button>", {
 
 buttonRow.append($("<button>", {
     id: "arh_button_compare-off",
-    class: "button",
+    class: "button arh_button",
     type: "button",
     disabled: "disabled",
     click: function(event) {
@@ -63,7 +63,7 @@ buttonRow.append($("<button>", {
 
 buttonRow.append($("<button>", {
     id: "arh_button_compare-on",
-    class: "button",
+    class: "button arh_button",
     type: "button",
     disabled: "disabled",
     click: function(event) {
