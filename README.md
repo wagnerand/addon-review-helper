@@ -1,4 +1,6 @@
 # Addon Review Helper
+## Download
+Download from [AMO :: Add-on Review Helper](https://addons.mozilla.org/en-US/firefox/addon/add-on-review-helper/)
 
 ## Features
 This add-on adds an overview grid to the Add-on review page on addons.mozilla.org (AMO).
