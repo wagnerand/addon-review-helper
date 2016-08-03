@@ -36,17 +36,17 @@ function download(downloadsArray, callback) {
         console.log(`Downloading ${value.downloadPath} to ${finalDest}.`);
         if (!callback) {
             // its likely a single download, so lets show it in download manager, otherwise i wont know when its done
-    		var list = yield Downloads.getList(Downloads.ALL);
-    		var download = yield Downloads.createDownload({
-    			source: value.downloadPath,
-    			target: finalDest
-    		});
-    		list.add(download);
-    		try {
-    			yield download.start();
-    		} finally {
-    			yield download.finalize(true);
-    		}
+            var list = yield Downloads.getList(Downloads.ALL);
+            var download = yield Downloads.createDownload({
+                source: value.downloadPath,
+                target: finalDest
+            });
+            list.add(download);
+            try {
+                yield download.start();
+            } finally {
+                yield download.finalize(true);
+            }
         } else {
             yield Downloads.fetch(value.downloadPath, finalDest);
         }
