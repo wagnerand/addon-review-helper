@@ -15,6 +15,9 @@
         "add-on",
         "review"
     ],
+    "permissions": {
+        "multiprocess": true
+    },
     "preferences": [{
         "name": "download_folder",
         "type": "directory",
