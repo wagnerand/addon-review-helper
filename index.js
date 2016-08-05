@@ -34,21 +34,16 @@ function download(downloadsArray, callback) {
     Promise.all(downloadsArray.map(Task.async(function*(value, index, array) {
         let finalDest = yield getValidFilename(downloadFolder, value.filename, 0);
         console.log(`Downloading ${value.downloadPath} to ${finalDest}.`);
-        if (!callback) {
-            // its likely a single download, so lets show it in download manager, otherwise i wont know when its done
-            var list = yield Downloads.getList(Downloads.ALL);
-            var download = yield Downloads.createDownload({
-                source: value.downloadPath,
-                target: finalDest
-            });
-            list.add(download);
-            try {
-                yield download.start();
-            } finally {
-                yield download.finalize(true);
-            }
-        } else {
-            yield Downloads.fetch(value.downloadPath, finalDest);
+        var list = yield Downloads.getList(Downloads.ALL);
+        var download = yield Downloads.createDownload({
+            source: value.downloadPath,
+            target: finalDest
+        });
+        list.add(download);
+        try {
+            yield download.start();
+        } finally {
+            yield download.finalize(true);
         }
         console.log(`${finalDest} has been downloaded`);
         return finalDest;
