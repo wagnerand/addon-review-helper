@@ -4,7 +4,9 @@ let data = [];
 
 let versions = $(".listing-header");
 versions.each(function(versionIndex) {
-    let number = $(this).text().split("·")[0].replace(/^\s*Version/, "").trim();
+    let versionMetadata = $(this).text().split("·");
+    let number = versionMetadata[0].replace(/^\s*Version/, "").trim();
+    let date = versionMetadata[1].trim();
     let files = $(".files .file-info", $(this).next());
     let dataFiles = [];
     files.each(function(filesIndex) {
@@ -20,6 +22,7 @@ versions.each(function(versionIndex) {
     let sourcesLink = $(this).next().find("strong:contains(Additional sources:)").parent().next().children().first().attr("href");
     data.push({
         versionNumber: number,
+        date: date,
         files: dataFiles,
         sourcesLink: sourcesLink
     });
@@ -31,9 +34,10 @@ let table = $("<table>", {
 
 for (let version of data) {
     let row = $("<tr>")
+    let colDate = $("<td>").text(version.date);
     let colVersion = $("<td>").text(version.versionNumber);
     let colSources = $("<td>").append(createCheckboxedLink("sources-" + version.versionNumber, version.sourcesLink, "Sources"));
-    row.append(colVersion).append(colSources).append(createFilesColumns(version.files));
+    row.append(colDate).append(colVersion).append(colSources).append(createFilesColumns(version.files));
     table.append(row);
 }
 
