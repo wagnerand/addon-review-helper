@@ -10,11 +10,13 @@ const {Downloads} = Cu.import("resource://gre/modules/Downloads.jsm");
 const {Task} = Cu.import("resource://gre/modules/Task.jsm");
 const {OS} = Cu.import("resource://gre/modules/osfile.jsm")
 
-function* getValidFilename(folder, filename, increment, callback) {
+function* getValidFilename(folder, filename) {
+    let increment = 0;
+    // Filter platform invalid filename characters
+    filename = filename.replace(/[*:?<>|/"\\]/g, '-');
     let fullPath = OS.Path.join(`${folder}`, `${filename}`);
-    let origFilename = filename;
     while (yield OS.File.exists(fullPath)) {
-        let filenameArray = origFilename.split(".");
+        let filenameArray = filename.split(".");
         filenameArray[filenameArray.length - 2] = `${filenameArray[filenameArray.length - 2]}_${++increment}`;
         fullPath = OS.Path.join(`${folder}`, `${filenameArray.join(".")}`);
     }
@@ -32,7 +34,7 @@ function download(downloadsArray, callback) {
     }
     let files = [];
     Promise.all(downloadsArray.map(Task.async(function*(value, index, array) {
-        let finalDest = yield getValidFilename(downloadFolder, value.filename, 0);
+        let finalDest = yield getValidFilename(downloadFolder, value.filename);
         console.log(`Downloading ${value.downloadPath} to ${finalDest}.`);
         var list = yield Downloads.getList(Downloads.ALL);
         var download = yield Downloads.createDownload({
