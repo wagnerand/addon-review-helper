@@ -57,7 +57,7 @@ function download(downloadsArray, callback) {
 pageMod.PageMod({
     include: /^https?:\/\/addons(?:-dev)?\.(?:mozilla|allizom)\.org\/(?:[a-z]{2}(?:\-[a-z]{2})?\/)?editors\/review\/(?:[^\/]+)(?:\/)?/i,
     attachTo: ["existing", "top"],
-    contentScriptFile: ["./jquery-2.1.4.min.js", "./content.js"],
+    contentScriptFile: ["./jquery.min.js", "./content.js"],
     contentStyleFile: "./style.css",
     onAttach: function(worker) {
         worker.port.on("download", function(downloadsArray) {
