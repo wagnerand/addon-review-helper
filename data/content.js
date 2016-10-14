@@ -126,21 +126,15 @@ function createFilesColumns(files) {
     for (let file of files) {
         let fileLink = createCheckboxedLink(`file-${getSlug(file.fileLink)}`, file.fileLink, file.platform);
         switch (file.status) {
-            case "Pending Full Review":
-                fileLink.last().addClass("arh_file-pending-full");
-                break;
-            case "Pending Preliminary Review":
-                fileLink.last().addClass("arh_file-pending-prelim");
+            case "Awaiting Review":
+                fileLink.last().addClass("arh_file-pending");
                 break;
             case "Rejected":
             case "Rejected or Unreviewed":
                 fileLink.last().addClass("arh_file-disabled");
                 break;
-            case "Fully Reviewed":
-                fileLink.last().addClass("arh_file-full");
-                break;
-            case "Preliminarily Reviewed":
-                fileLink.last().addClass("arh_file-prelim");
+            case "Approved":
+                fileLink.last().addClass("arh_file-approved");
                 break;
         }
         fileNameCol.append(fileLink).append("<br>");

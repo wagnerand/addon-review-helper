@@ -32,23 +32,13 @@
 #arh #arh_button-row {
 }
 
-.arh_file-pending-full {
-    font-style: italic;
-    font-weight: bold;
-}
-
-.arh_file-full {
-    font-weight: bold;
-}
-
-.arh_file-pending-prelim {
+.arh_file-pending {
     font-style: italic;
 }
 
-.arh_file-prelim {
-
+.arh_file-approved {
 }
 
 .arh_file-disabled {
-    text-decoration: line-through !important;
+    text-decoration: line-through double !important;
 }
