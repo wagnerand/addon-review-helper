@@ -1,5 +1,7 @@
 # Addon Review Helper
 ## Download
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/wagnerand/addon-review-helper.svg)](https://greenkeeper.io/)
 Download from [AMO :: Add-on Review Helper](https://addons.mozilla.org/en-US/firefox/addon/add-on-review-helper/)
 
 ## Features
