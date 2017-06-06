@@ -55,7 +55,7 @@ function download(downloadsArray, callback) {
 }
 
 pageMod.PageMod({
-    include: /^https?:\/\/addons(?:-dev)?\.(?:mozilla|allizom)\.org\/(?:[a-z]{2}(?:\-[a-z]{2})?\/)?editors\/review\/(?:[^\/]+)(?:\/)?/i,
+    include: /^https?:\/\/addons(?:-dev)?\.(?:mozilla|allizom)\.org\/(?:[a-z]{2}(?:\-[a-z]{2})?\/)?editors\/review(?:-(?:un)?listed)?\/(?:[^\/]+)(?:\/)?/i,
     attachTo: ["existing", "top"],
     contentScriptFile: ["./jquery.min.js", "./content.js"],
     contentStyleFile: "./style.css",
