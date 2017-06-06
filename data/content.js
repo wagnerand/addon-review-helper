@@ -93,26 +93,26 @@ reviewAction.before(outerDiv);
 
 $("#arh_table input:checkbox").change(function() {
     let allCheckedCheckboxes = $("#arh_table input:checkbox:checked");
-    if (allCheckedCheckboxes.size() == 0) {
+    if (allCheckedCheckboxes.length == 0) {
         $("button:button[id^='arh_button_']").prop("disabled", true);
     } else {
         $("button:button[id^='arh_button_download']").prop("disabled", false);
 
         let allCheckedSources = $("#arh_table input:checkbox[value^='sources-']:checked");
         let allCheckedFiles = $("#arh_table input:checkbox[value^='file-']:checked");
-        if ((allCheckedSources.size() > 0) && (allCheckedFiles.size() > 0)) {
+        if ((allCheckedSources.length > 0) && (allCheckedFiles.length > 0)) {
             $("button:button[id^='arh_button_compare-']").prop("disabled", true);
         } else {
-            if (allCheckedSources.size() > 0) {
+            if (allCheckedSources.length > 0) {
                 $("button:button[id^='arh_button_compare-']").prop("disabled", true);
             }
-            if (allCheckedSources.size() == 2) {
+            if (allCheckedSources.length == 2) {
                 $("button:button[id^='arh_button_compare-off']").prop("disabled", false);
             }
-            if (allCheckedFiles.size() > 0) {
+            if (allCheckedFiles.length > 0) {
                 $("button:button[id^='arh_button_compare-']").prop("disabled", true);
             }
-            if (allCheckedFiles.size() == 2) {
+            if (allCheckedFiles.length == 2) {
                 $("button:button[id^='arh_button_compare-']").prop("disabled", false);
             }
         }
