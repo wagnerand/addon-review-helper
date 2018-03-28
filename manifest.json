@@ -1,0 +1,27 @@
+{
+  "applications": {
+    "gecko": {
+      "id": "@addon-review-helper"
+    }
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://reviewers.addons.mozilla.org/*"],
+      "js": ["content/jquery.min.js", "content/content.js"],
+      "css": ["content/style.css"]
+    }
+  ],
+
+  "description": "Tools for Add-on reviewers",
+
+  "manifest_version": 2,
+
+  "name": "Add-on Review Helper",
+
+  "version": "0.9"
+}

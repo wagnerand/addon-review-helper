@@ -10,7 +10,7 @@ versions.each(function(versionIndex) {
     let files = $(".files .file-info", $(this).next());
     let dataFiles = [];
     files.each(function(filesIndex) {
-        let fileItem = $("a.editors-install", $(this));
+        let fileItem = $("a.reviewers-install", $(this));
         dataFiles.push({
             fileLink: fileItem.attr("href"),
             validationLink: fileItem.parent().next().next().attr("href"),
@@ -126,15 +126,16 @@ function createFilesColumns(files) {
     for (let file of files) {
         let fileLink = createCheckboxedLink(`file-${getSlug(file.fileLink)}`, file.fileLink, file.platform);
         switch (file.status) {
+            case "Approved (Confirmed)":
+                fileLink.last().addClass("arh_file-approved");
+                break;
+            case "Approved":
             case "Awaiting Review":
                 fileLink.last().addClass("arh_file-pending");
                 break;
             case "Rejected":
             case "Rejected or Unreviewed":
                 fileLink.last().addClass("arh_file-disabled");
-                break;
-            case "Approved":
-                fileLink.last().addClass("arh_file-approved");
                 break;
         }
         fileNameCol.append(fileLink).append("<br>");
